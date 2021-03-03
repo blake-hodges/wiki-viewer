@@ -25,6 +25,7 @@ function App() {
                     let myObj = {};
                     myObj.title = item.title;
                     myObj.snippet = item.snippet;
+                    myObj.id = item.pageid;
                     return myObj;
                 })
                 setData(map1);
@@ -36,29 +37,45 @@ function App() {
 
 
     return (
-    <div>
-        <h1>Wikipedia Viewer</h1>
-        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" rel="noreferrer">Random Wikipedia Page</a>
-        <form>
-            <label htmlFor="search">Search</label>
-            <input type="text" id="search" name="search" onChange={handleChange} />
-            <button onClick={fetchData}>Submit</button>
-        </form>
-        <p>{searchQuery}</p>
+    <div className="wrapper">
+        <div></div>
         <div>
-            {data.map(item => {
-                return(
-                <div key={item.title}>
-                    <h3>{item.title}</h3>
-                    <p dangerouslySetInnerHTML={{__html: item.snippet}}></p>
-                </div>
-                )
-            })}
+            <h1>Wikipedia Viewer</h1>
+            <p>Enter a term below to search wikipedia.</p>
+            <Form handleChange={handleChange} fetchData={fetchData} />
+            <Entries data={data}/>
+            <p>Click <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" rel="noreferrer">here</a> to discover a new page on Wikipedia.</p>
         </div>
+        <div></div>
     </div>
   );
 }
 
+const Form = (props) => {
+    return (
+        <form>
+            <label htmlFor="search">Search</label>
+            <input type="text" id="search" name="search" onChange={props.handleChange} />
+            <button onClick={props.fetchData}>Submit</button>
+        </form>
+    )
+}
 
+const Entries = (props) => {
+    return (
+    <div>
+        {props.data.map(item => {
+            let url = 'https://en.wikipedia.org/?curid=' + item.id;
+            return(
+            <div key={item.title}>
+                    <h3>{item.title}</h3>
+                    <p dangerouslySetInnerHTML={{__html: item.snippet}}></p>
+                    <a href={url} target="_blank" rel="noreferrer">link</a>
+            </div>
+            )
+        })}
+    </div>
+    )
+}
 
 export default App;
