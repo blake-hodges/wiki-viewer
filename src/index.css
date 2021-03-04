@@ -1,1 +1,55 @@
+/* <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet"> */
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+
+* {
+    font-family: 'Inter';
+    color: #262e4d;
+}
+
+.wrapper {
+    display: flex;
+    /* justify-content: center; */
+    /* overflow: hidden; */
+    height: 100vh;
+}
+
+.search {
+    /* height: 100vh; */
+    border-right: 1px solid grey;
+    padding-right: 20px;
+    padding-left: 10px;
+    background-color: #ffedde;
+    width: 30%;
+}
+
+h1 {
+    /* color: white; */
+    font-size: 40px;
+}
+
+.form label {
+    padding-right: 5px;
+}
+
+.form button {
+    margin-left: 5px;
+}
+
+.entries {
+    /* height: 100vh; */
+    overflow: auto;
+    background-color: #ffe5d0;
+    width: 70%;
+}
+
+.entries a {
+    text-decoration: none;
+}
+
+.entry {
+    box-sizing: border-box;
+    border: 1px solid grey;
+    padding: 10px 20px;
+}

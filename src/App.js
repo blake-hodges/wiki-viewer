@@ -4,8 +4,8 @@ function App() {
     const [searchQuery, setSearchQuery] = useState("");
     const [data, setData] = useState([
         {
-            title: "Entries",
-            snippet: "Please wait for entries"
+            title: "No entries",
+            snippet: "Submit a search in the box to the left."
         }
     ]);
     const handleChange = (e) => {
@@ -38,22 +38,22 @@ function App() {
 
     return (
     <div className="wrapper">
-        <div></div>
-        <div>
+        <div className="search">
             <h1>Wikipedia Viewer</h1>
             <p>Enter a term below to search wikipedia.</p>
             <Form handleChange={handleChange} fetchData={fetchData} />
-            <Entries data={data}/>
             <p>Click <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" rel="noreferrer">here</a> to discover a new page on Wikipedia.</p>
         </div>
-        <div></div>
+        <div className="entries">
+            <Entries data={data}/>
+        </div>
     </div>
   );
 }
 
 const Form = (props) => {
     return (
-        <form>
+        <form className="form">
             <label htmlFor="search">Search</label>
             <input type="text" id="search" name="search" onChange={props.handleChange} />
             <button onClick={props.fetchData}>Submit</button>
@@ -64,14 +64,23 @@ const Form = (props) => {
 const Entries = (props) => {
     return (
     <div>
+    {/*render data depending on if request data has been received*/}
         {props.data.map(item => {
             let url = 'https://en.wikipedia.org/?curid=' + item.id;
+            if (props.data) {
+
+            } else {
+
+            }
             return(
-            <div key={item.title}>
-                    <h3>{item.title}</h3>
-                    <p dangerouslySetInnerHTML={{__html: item.snippet}}></p>
-                    <a href={url} target="_blank" rel="noreferrer">link</a>
-            </div>
+
+                <a key={item.title} href={url} target="_blank" rel="noreferrer">
+                    <div className="entry">
+                        <h3>{item.title}</h3>
+                        <p dangerouslySetInnerHTML={{__html: item.snippet + "..."}}></p>
+                    </div>
+                </a>
+
             )
         })}
     </div>
