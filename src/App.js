@@ -3,10 +3,6 @@ import React, { useState } from 'react';
 function App() {
     const [searchQuery, setSearchQuery] = useState("");
     const [data, setData] = useState([
-        {
-            title: "No entries",
-            snippet: "Submit a search in the box to the left."
-        }
     ]);
     const handleChange = (e) => {
         setSearchQuery(e.target.value);
@@ -62,17 +58,19 @@ const Form = (props) => {
 }
 
 const Entries = (props) => {
-    return (
-    <div>
-    {/*render data depending on if request data has been received*/}
-        {props.data.map(item => {
+    if (props.data.length == 0) {
+        return (
+            <div className="empty-search">
+                <h3>No entries</h3>
+                <p>Submit a search in the box to the left.</p>
+            </div>
+        )
+    }
+    else {
+
+        let entryList = props.data.map(item => {
             let url = 'https://en.wikipedia.org/?curid=' + item.id;
-            if (props.data) {
-
-            } else {
-
-            }
-            return(
+            return (
 
                 <a key={item.title} href={url} target="_blank" rel="noreferrer">
                     <div className="entry">
@@ -82,9 +80,14 @@ const Entries = (props) => {
                 </a>
 
             )
-        })}
-    </div>
-    )
+        })
+        return (
+            <div>
+                {entryList}
+            </div>
+        )
+    }
+
 }
 
 export default App;

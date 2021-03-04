@@ -53,3 +53,7 @@ h1 {
     border: 1px solid grey;
     padding: 10px 20px;
 }
+
+.empty-search {
+    padding: 10px 20px;
+}
