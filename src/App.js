@@ -11,17 +11,20 @@ function App() {
         let searchQueryString = searchQuery.toString();
         let url = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=10&srsearch=${searchQueryString};`
         fetch(url)
-            .then(response => {
-                console.log('resolved', response)
-                return response.json();
-            })
+            .then(response => response.json())
             .then(myJson => {
+                console.log(myJson);
                 let myData = myJson.query.search;
-                let map1 = myData.map(item => {
+                console.log(myData);
+                    let map1 = myData.map(item => {
                     let myObj = {};
+                    let str = item.snippet.replace(/(<span class="searchmatch">|<\/span>|&quot;)/gi, "");
+                    //console.log(str);
                     myObj.title = item.title;
-                    myObj.snippet = item.snippet;
+                    myObj.snippet = str + "...";
+                    //myObj.snippet = item.snippet;
                     myObj.id = item.pageid;
+                    console.log();
                     return myObj;
                 })
                 setData(map1);
@@ -94,7 +97,8 @@ const Entries = (props) => {
                 <a key={item.title} href={url} target="_blank" rel="noreferrer">
                     <div className="entry">
                         <h3>{item.title}</h3>
-                        <p dangerouslySetInnerHTML={{__html: item.snippet + "..."}}></p>
+                        {/*}<p dangerouslySetInnerHTML={{__html: item.snippet + "..."}}></p>*/}
+                        <p>{item.snippet}</p>
                     </div>
                 </a>
 
