@@ -57,3 +57,20 @@ h1 {
 .empty-search {
     padding: 10px 20px;
 }
+
+
+@media screen and (max-width: 600px) {
+    .wrapper {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .search {
+        width: 100%;
+    }
+    .entries {
+        height: 100%;
+        min-height: 400px;
+        width: 100%;
+    }
+}

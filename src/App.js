@@ -24,7 +24,6 @@ function App() {
                     myObj.snippet = str + "...";
                     //myObj.snippet = item.snippet;
                     myObj.id = item.pageid;
-                    console.log();
                     return myObj;
                 })
                 setData(map1);
@@ -74,7 +73,7 @@ const Form = (props) => {
 }
 
 const Entries = (props) => {
-    if (props.data.length == 0) {
+    if (props.data.length === 0) {
         return (
             <div className="empty-search">
                 <h3>No entries</h3>
@@ -97,7 +96,6 @@ const Entries = (props) => {
                 <a key={item.title} href={url} target="_blank" rel="noreferrer">
                     <div className="entry">
                         <h3>{item.title}</h3>
-                        {/*}<p dangerouslySetInnerHTML={{__html: item.snippet + "..."}}></p>*/}
                         <p>{item.snippet}</p>
                     </div>
                 </a>
